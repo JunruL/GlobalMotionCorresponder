@@ -1,0 +1,36 @@
+name: gmc
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.10
+  - pip
+  - setuptools
+  - wheel
+  - cudatoolkit=11.8
+  - pytorch=2.4.1
+  - torchvision=0.19.1
+  - torchaudio=2.4.1
+  - faiss-gpu=1.7.4
+  - numpy=1.24.4
+  - scipy
+  - scikit-learn=1.3.2
+  - matplotlib
+  - pillow
+  - opencv
+  - pyyaml
+  - tqdm
+  - easydict
+  - ninja
+  - pip:
+      - gsplat==1.5.3
+      - lpips==0.1.4
+      - pyemd==1.0.0
+      - plyfile==1.1.3
+      - wandb==0.23.1
+      - jaxtyping
+      - rich
+      - gitpython

@@ -1,0 +1,75 @@
+log:
+  expname: car
+  out_dir: output/gmc_synthetic_scenes
+  gmc_ckpt_freq: 20_000
+  wandb_tags: ['gmc_synthetic_scenes', 'car']
+  log_energy_term_loss: True
+
+train:
+  load_gmc_ckpt_path: Null
+  batch_size: 20_000
+  total_iteration: 40_000
+  joint_start_iteration: 20_000
+
+joint:
+  turn_on_desify_prune: True
+  turn_on_desify: True
+  desify_prune_iters: 10_000
+
+loss:
+  self_render_loss_weight: 1.0
+  cross_render_loss_weight: 1.0
+  lpips_weight: 0.2
+  self_local_distance_weight_start: 0.0
+  self_local_distance_weight_end: 20.0
+  self_local_distance_weight_steps: 20_000
+  cross_local_distance_weight_start: 0.0
+  cross_local_distance_weight_end: 20.0
+  cross_local_distance_weight_steps: 20_000
+  local_agree_loss_neighbour_num: 256
+
+gs:
+  checkpoint1: output/single_fgs/gmc_synthetic_scenes/car/dinov1s8_rp16_pca4_f1/chkpnt30000.pth
+  checkpoint2: output/single_fgs/gmc_synthetic_scenes/car/dinov1s8_rp16_pca4_f2/chkpnt30000.pth
+  pretrained_frame1_dir: output/single_fgs/gmc_synthetic_scenes/car/dinov1s8_rp16_pca4_f1
+  pretrained_frame2_dir: output/single_fgs/gmc_synthetic_scenes/car/dinov1s8_rp16_pca4_f2
+  load_iteration: 30_000
+  checkpoint1_gt: output/single_fgs/gmc_synthetic_scenes/car/dinov1s8_rp16_pca4_f1/chkpnt30000.pth
+  checkpoint2_gt: output/single_fgs/gmc_synthetic_scenes/car/dinov1s8_rp16_pca4_f2/chkpnt30000.pth
+  feat_dim: 16
+  rp_dim: 16
+  pca_dim: 4
+  lr:
+    fgs_xyz_lr: 0.000016
+    fgs_f_dc_lr: 0.0001
+    fgs_f_rest_lr: 0.0001
+    fgs_opacity_lr: 0.05
+    fgs_scaling_lr: 0.005
+    fgs_rotation_lr: 0.0
+    fgs_semantic_feature_lr: 0.0001
+
+gmc:
+  init_trans_zero: false
+  dropout_ratio: 0.2
+  xyz_input_scale: 1.0
+  dino_input_scale: 1.0
+  learning_rate: 0.0005
+
+database:
+  color_dist_weight: 1.0
+  feat_dist_weight: 1.0
+  xyz_dist_weight: 10.0
+  noise_type: gumbel
+  noise_gumbel_mu: 0
+  noise_gumbel_beta: 0.1
+  fg_info_path: Null
+
+vis:
+  load_iteration: 39_999
+  white_background: True
+  render_skip_every: 20
+  video_view_id: 0
+
+eval:
+  load_iteration: 39_999
+  max_pt: 2_000
